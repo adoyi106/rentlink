@@ -24,7 +24,7 @@ async function bootstrap() {
 app.use(helmet());
   configureSwagger(app);
 
-  await app.listen(process.env.PORT ?? 3000, ()=>{
+  await app.listen(process.env.PORT ?? 3000, '0.0.0.0', ()=>{
      console.warn(`
     -----------------------------------------------------------
     lms-onboarding Application Started!
