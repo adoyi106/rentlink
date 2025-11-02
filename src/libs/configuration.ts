@@ -14,4 +14,14 @@ export default () => ({
     secret: config.get<string>('JWT_SECRET'),
     expiresIn: config.get<number>('JWT_EXPIRES_IN'),
   },
+   mail: {
+    host: config.get<string>("MAIL_HOST"),
+    port: config.get<number>("MAIL_PORT"),
+    user: config.get<string>("MAIL_USER"),
+    pass: config.get<string>("MAIL_PASS"),
+    from: config.get<string>("MAIL_FROM"),
+  },
+  app:{
+    support: config.get<string>("APP_support")
+  }
 })

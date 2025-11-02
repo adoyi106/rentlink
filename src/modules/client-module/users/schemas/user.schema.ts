@@ -18,6 +18,8 @@ export interface IUser {
   bankName?: string;
   active: boolean;
   fullName?: string;
+  passwordResetToken?: string,
+  passwordResetExpires?: Date
 }
 
 export interface User extends IUser,  Document{
@@ -28,7 +30,7 @@ _id: Types.ObjectId;
 export const UserSchema = new Schema<User>({
 firstName:{type: String, required: true },
 lastName: {type: String, required: true},
-email: {type: String, required: true, unique: true}, 
+email: {type: String, required: true, index: 1}, 
 password: {type: String, required: true},
 phone: {type: String},
 role:{type: String, enum:Object.values(SystemUsers), default: SystemUsers.Tenant, required: true},
@@ -39,6 +41,8 @@ isEmailVerified: {type: Boolean},
 isPhoneVerified: {type: Boolean},
 bankAccount: {type: String},
 bankName: {type:String},
+passwordResetToken: {type:String},
+passwordResetExpires: {type: Date},
 active: {type: Boolean, required: true, default: true, }
 
 },
@@ -53,7 +57,7 @@ active: {type: Boolean, required: true, default: true, }
     return `${this.firstName} ${this.lastName}`
   });
 
-  UserSchema.index({email: 1});
+  UserSchema.index({email: 1}, {unique: true});
   UserSchema.index({phone: 1});
  
   export const UserModelName= 'User'
